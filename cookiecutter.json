@@ -4,5 +4,6 @@
   "author": "Andrew Bell",
   "email": "andrew.bell012276@gmail.com",
   "python_version": "3.12",
-  "python_binding": "pybind"
+  "python_binding": "pybind",
+  "init_git": "yes"
 }
