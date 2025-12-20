@@ -1,9 +1,25 @@
-Checks: >
-  -*, clang-analyzer-*, bugprone-*, performance-*, portability-*, modernize-*, readability-*, cppcoreguidelines-*, -cppcoreguidelines-avoid-magic-numbers, -cppcoreguidelines-pro-bounds-pointer-arithmetic, -cppcoreguidelines-pro-type-reinterpret-cast, -cppcoreguidelines-owning-memory, -readability-magic-numbers, -readability-function-cognitive-complexity, -readability-identifier-length, -modernize-use-trailing-return-type
-
-WarningsAsErrors: >
-  clang-analyzer-*, bugprone-*, portability-*, performance-*
-
+Checks: |
+  -*
+  clang-analyzer-*
+  bugprone-*
+  performance-*
+  portability-*
+  modernize-*
+  readability-*
+  cppcoreguidelines-*
+  -cppcoreguidelines-avoid-magic-numbers
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic
+  -cppcoreguidelines-pro-type-reinterpret-cast
+  -cppcoreguidelines-owning-memory
+  -readability-magic-numbers
+  -readability-function-cognitive-complexity
+  -readability-identifier-length
+  -modernize-use-trailing-return-type
+WarningsAsErrors: |
+  clang-analyzer-*
+  bugprone-*
+  portability-*
+  performance-*
 HeaderFilterRegex: '^(include|src|tests)/'
 FormatStyle: file
 CheckOptions:
