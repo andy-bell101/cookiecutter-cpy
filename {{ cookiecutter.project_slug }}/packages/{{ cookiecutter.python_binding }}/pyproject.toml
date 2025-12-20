@@ -59,5 +59,4 @@ wheel.py-api = "cp312"
 
 [tool.scikit-build.cmake.define]
 ENABLE_LTO = true
-ENABLE_ASAN_UBSAN = true
 ENABLE_WERROR = true
