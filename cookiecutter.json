@@ -5,5 +5,6 @@
   "email": "andrew.bell012276@gmail.com",
   "python_version": "3.12",
   "python_binding": "pybind",
-  "init_git": "yes"
+  "init_git": "yes",
+  "uv_sync": "yes"
 }
