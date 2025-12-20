@@ -4,6 +4,10 @@ cmake_minimum_required(VERSION 3.31)
 project(_core LANGUAGES CXX)
 enable_testing()
 
+set(SKBUILD_PROJECT_NAME "{{ cookiecutter.python_binding }}" CACHE STRING "Project name")
+set(SKBUILD_PROJECT_VERSION "0.1.0" CACHE STRING "Project version")
+set(SKBUILD_SABI_MODULE "Development.SABIModule" CACHE STRING "Stable ABI")
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
