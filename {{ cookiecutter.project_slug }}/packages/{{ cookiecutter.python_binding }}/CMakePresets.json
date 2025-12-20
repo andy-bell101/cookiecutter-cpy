@@ -20,8 +20,6 @@
         "ENABLE_WERROR": "OFF"
       }
     },
-
-    // ---------------- Linux / macOS: GCC ----------------
     {
       "name": "gcc-debug",
       "displayName": "GCC Debug",
@@ -56,8 +54,6 @@
         "ENABLE_LTO": "ON"
       }
     },
-
-    // ---------------- Linux / macOS: Clang ----------------
     {
       "name": "clang-debug",
       "displayName": "Clang Debug",
@@ -92,8 +88,6 @@
         "ENABLE_LTO": "ON"
       }
     },
-
-    // ---------------- Windows: MSVC (cl) ----------------
     {
       "name": "msvc-debug",
       "displayName": "MSVC Debug",
