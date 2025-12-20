@@ -1,0 +1,21 @@
+CompileFlags:
+  # Prefer CMake's compile_commands.json; add fallbacks for editor-only parsing.
+  Add: [-std=c++17]
+  # If you use multiple preset build dirs, clangd will use the closest
+  # compile_commands.json it finds. This helps if you open the repo root.
+  CompilationDatabase: build/cp312-abi3-linux_x86_64
+Diagnostics:
+  # clangd diagnostics are separate from the compiler's; keep them helpful.
+  UnusedIncludes: Strict
+  MissingIncludes: Strict
+Index:
+  Background: Build
+  StandardLibrary: Yes
+InlayHints:
+  Enabled: Yes
+  ParameterNames: Yes
+  DeducedTypes: Yes
+Completion:
+  AllScopes: Yes
+Hover:
+  ShowAKA: Yes

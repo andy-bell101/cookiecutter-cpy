@@ -1,0 +1,8 @@
+{
+  "project_name": "C++ and Python template",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+  "author": "Andrew Bell",
+  "email": "andrew.bell012276@gmail.com",
+  "python_version": "3.12",
+  "python_binding": "pybind"
+}

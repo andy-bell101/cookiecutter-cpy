@@ -1,0 +1,63 @@
+[project]
+name = "{{ cookiecutter.python_binding }}"
+version = "0.1.0"
+description = ""
+authors = [{ name = "{{ cookiecutter.author }}", email = "{{ cookiecutter.email }}" }]
+license = "MIT"
+readme = "README.md"
+requires-python = ">={{ cookiecutter.python_version }}"
+dependencies = []
+
+[tool.pylsp-mypy]
+enabled = true
+live_mode = false
+strict = true
+# dmypy = true
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+extend-select = ["I"]
+
+[dependency-groups]
+build = [
+  "scikit-build-core"
+]
+dev = [
+]
+doc = [
+]
+
+[tool.uv]
+default-groups = ["build", "dev", "doc"]
+cache-keys = [
+  { file = "pyproject.toml" },
+  { file = "**/*.cpp" },
+  { file = "**/*.h" },
+  { file = "CMakeLists.txt" },
+  { file = "CMakePresets.json" },
+]
+
+[build-system]
+requires = ["scikit-build-core"]
+build-backend = "scikit_build_core.build"
+
+
+[tool.scikit-build]
+# Make CMake/Ninja selection robust across platforms.
+ninja.make-fallback = true
+
+# Ensure a Release build for wheels by default.
+cmake.build-type = "Release"
+
+# If you use src-layout (recommended), scikit-build-core will still package it;
+# just ensure your package exists (yourpkg/__init__.py).
+wheel.packages = ["{{ cookiecutter.python_binding }}"]
+build-dir = "build/{wheel_tag}"
+wheel.py-api = "cp312"
+
+[tool.scikit-build.cmake.define]
+ENABLE_LTO = true
+ENABLE_ASAN_UBSAN = true
+ENABLE_WERROR = true

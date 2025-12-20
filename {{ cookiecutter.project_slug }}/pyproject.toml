@@ -1,0 +1,62 @@
+[project]
+name = "{{ cookiecutter.project_slug}}"
+version = "0.1.0"
+description = ""
+authors = [{ name = "{{ cookiecutter.author }}", email = "{{ cookiecutter.email }}" }]
+license = "MIT"
+readme = "README.md"
+requires-python = ">={{ cookiecutter.python_version }}"
+dependencies = [
+  # workspace dependencies
+  "{{ cookiecutter.python_binding }}"
+]
+
+[tool.pylsp-mypy]
+enabled = true
+live_mode = false
+strict = true
+# dmypy = true
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+extend-select = ["I"]
+
+[dependency-groups]
+build =[
+  "scikit-build-core"
+]
+dev = [
+  "hypothesis>=6.131.6",
+  "ipython>=9.1.0",
+  "jupyter>=1.1.1",
+  "maturin>=1.0,<2.0",
+  "mypy>=1.15.0",
+  "pylsp-mypy>=0.7.0",
+  "pytest>=8.3.5",
+  "pytest-cov>=6.1.0",
+  "python-lsp-ruff>=2.2.2",
+  "python-lsp-server>=1.12.2",
+  "ruff>=0.11.3",
+]
+doc = [
+  "myst-nb>=1.2.0",
+  "myst-parser>=4.0.1",
+  "sphinx>=8.2.3",
+  "sphinx-needs>=5.1.0",
+  "sphinxcontrib-bibtex>=2.6.3",
+]
+
+[tool.uv]
+default-groups = ["build", "dev", "doc"]
+
+[tool.uv.sources]
+{{ cookiecutter.python_binding }} = { workspace = true }
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"

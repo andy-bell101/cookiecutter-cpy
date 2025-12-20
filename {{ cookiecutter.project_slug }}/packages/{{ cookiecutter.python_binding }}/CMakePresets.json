@@ -1,0 +1,139 @@
+{
+  "version": 10,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 31,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_CXX_STANDARD": "17",
+        "CMAKE_CXX_STANDARD_REQUIRED": "ON",
+        "CMAKE_CXX_EXTENSIONS": "OFF",
+        "ENABLE_LTO": "OFF",
+        "ENABLE_WERROR": "OFF"
+      }
+    },
+
+    // ---------------- Linux / macOS: GCC ----------------
+    {
+      "name": "gcc-debug",
+      "displayName": "GCC Debug",
+      "inherits": "base",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Linux" },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "CMAKE_CXX_VISIBILITY_PRESET": "hidden",
+        "CMAKE_VISIBILITY_INLINES_HIDDEN": "ON"
+      }
+    },
+    {
+      "name": "gcc-release",
+      "displayName": "GCC Release",
+      "inherits": "base",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Linux" },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "CMAKE_CXX_VISIBILITY_PRESET": "hidden",
+        "CMAKE_VISIBILITY_INLINES_HIDDEN": "ON"
+      }
+    },
+    {
+      "name": "gcc-release-lto",
+      "displayName": "GCC Release (LTO)",
+      "inherits": "gcc-release",
+      "cacheVariables": {
+        "ENABLE_LTO": "ON"
+      }
+    },
+
+    // ---------------- Linux / macOS: Clang ----------------
+    {
+      "name": "clang-debug",
+      "displayName": "Clang Debug",
+      "inherits": "base",
+      "condition": { "type": "inList", "string": "${hostSystemName}", "list": ["Linux", "Darwin"] },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_CXX_VISIBILITY_PRESET": "hidden",
+        "CMAKE_VISIBILITY_INLINES_HIDDEN": "ON"
+      }
+    },
+    {
+      "name": "clang-release",
+      "displayName": "Clang Release",
+      "inherits": "base",
+      "condition": { "type": "inList", "string": "${hostSystemName}", "list": ["Linux", "Darwin"] },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_CXX_VISIBILITY_PRESET": "hidden",
+        "CMAKE_VISIBILITY_INLINES_HIDDEN": "ON"
+      }
+    },
+    {
+      "name": "clang-release-lto",
+      "displayName": "Clang Release (LTO)",
+      "inherits": "clang-release",
+      "cacheVariables": {
+        "ENABLE_LTO": "ON"
+      }
+    },
+
+    // ---------------- Windows: MSVC (cl) ----------------
+    {
+      "name": "msvc-debug",
+      "displayName": "MSVC Debug",
+      "inherits": "base",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows" },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "msvc-release",
+      "displayName": "MSVC Release",
+      "inherits": "base",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows" },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "msvc-release-lto",
+      "displayName": "MSVC Release (LTO)",
+      "inherits": "msvc-release",
+      "cacheVariables": {
+        "ENABLE_LTO": "ON"
+      }
+    }
+  ],
+
+  "buildPresets": [
+    { "name": "build-gcc-debug", "configurePreset": "gcc-debug" },
+    { "name": "build-gcc-release", "configurePreset": "gcc-release" },
+    { "name": "build-gcc-release-lto", "configurePreset": "gcc-release-lto" },
+
+    { "name": "build-clang-debug", "configurePreset": "clang-debug" },
+    { "name": "build-clang-release", "configurePreset": "clang-release" },
+    { "name": "build-clang-release-lto", "configurePreset": "clang-release-lto" },
+
+    { "name": "build-msvc-debug", "configurePreset": "msvc-debug" },
+    { "name": "build-msvc-release", "configurePreset": "msvc-release" },
+    { "name": "build-msvc-release-lto", "configurePreset": "msvc-release-lto" }
+  ]
+}
+

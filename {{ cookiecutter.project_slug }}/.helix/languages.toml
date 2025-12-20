@@ -1,0 +1,26 @@
+[[language]]
+auto-format = true
+name = "python"
+language-servers = ["pylsp"]
+
+[language-server.pylsp]
+command = "uv"
+args = ["run", "pylsp"]
+
+[language-server.pylsp.config.pylsp.plugins.ruff]
+enabled = true
+formatEnabled = true
+extendSelect = ["I"]
+format = ["I"]
+
+[language.debugger]
+name = "debugpy"
+transport = "stdio"
+command = "uv"
+args = ["run", "python", "-m", "debugpy.adapter"]
+
+[[language.debugger.templates]]
+name = "source"
+request = "launch"
+completion = [{ name = "entrypoint", completion = "filename", default = "." }]
+args = { mode = "debug", program = "{0}" }
