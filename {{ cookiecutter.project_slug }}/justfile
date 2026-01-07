@@ -1,0 +1,23 @@
+default:
+    just --list
+
+configure compiler target:
+    cmake --preset {{ compiler }}-{{ target }}
+    cmake --build --preset build-{{ compiler }}-{{ target }}
+
+lint_oneshot compiler:
+    @just configure {{ compiler }} lint
+    clang-tidy -p build/{{ compiler }}-lint $(git ls-files '*.cpp' '*.h' '*.hpp')
+
+lint compiler="gcc":
+    watchexec -qr -w src -w tests --clear -- just lint_oneshot {{ compiler }}
+
+repl:
+    watchexec -qr -w {{ cookiecutter.python_binding }} --clear -- uv run ipython
+
+test_oneshot compiler:
+    @just configure {{ compiler }} test
+    ctest --test-dir build/{{ compiler }}-test --output-on-failure
+
+test compiler="gcc":
+    watchexec -qr -w src -w tests --clear -- just test_oneshot {{ compiler }}
