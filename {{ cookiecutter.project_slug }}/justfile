@@ -1,3 +1,7 @@
+alias pane1 := repl
+alias pane2 := lint
+alias pane3 := test
+
 default:
     just --list
 
